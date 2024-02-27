@@ -1,20 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import SearchScreen from './src/screen/SearchScreen';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import SavedKeywordProvider from './src/provider/SavedKeywords';
 
 export default function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SavedKeywordProvider>
+      <QueryClientProvider client={queryClient}>
+        <SearchScreen />
+      </QueryClientProvider>
+    </SavedKeywordProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
